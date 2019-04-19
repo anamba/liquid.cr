@@ -4,6 +4,7 @@ Arranged in reverse chronological order (latest changes on top).
 
 ## Unreleased
 
+* Support for Crystal 0.28.0
 * [NEW] Supports hash access, via string literal or string variable
 * [FIXED] Accept single quoted strings
 * [FIXED] Accept a wider range of complex boolean expressions

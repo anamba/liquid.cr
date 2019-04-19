@@ -40,6 +40,13 @@ module Liquid::Filters
       end
 
       left / right
+
+      # replace with this prior to 0.29 release:
+      # if left.is_a?(Int) && right.is_a?(Int)
+      #   left // right
+      # else
+      #   left.to_f / right
+      # end
     end
   end
 
