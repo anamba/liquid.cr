@@ -8,7 +8,7 @@ module Liquid
       "comment" => /(?<!\\){%\s*endcomment\s*\-?%}|$/,
     }
 
-    getter root : Root
+    getter root : Block::Root
 
     @str : String
     @i = 0
@@ -18,7 +18,7 @@ module Liquid
     @rstrip = false
 
     # buffers
-    @nodes = Array(Node).new
+    @nodes = Array(Block::Node).new
     @buffer = ""
 
     def self.parse(str : String)
@@ -37,7 +37,7 @@ module Liquid
     end
 
     def initialize(@str)
-      @root = Root.new
+      @root = Block::Root.new
       @nodes << @root
     end
 

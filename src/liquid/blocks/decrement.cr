@@ -1,7 +1,7 @@
 require "../blocks"
 
 module Liquid::Block
-  class Decrement < Liquid::Block::InlineBlock
+  class Decrement < InlineBlock
     REGEXP = /decrement (?<varname>#{VAR})/
 
     getter :var_name

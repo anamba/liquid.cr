@@ -45,7 +45,7 @@ module Liquid
       some.gsub '"', "\\\""
     end
 
-    def visit(node : Node)
+    def visit(node : Block::Node)
       node.children.each &.accept self
     end
 
@@ -53,23 +53,23 @@ module Liquid
       to_io %(Liquid::Block::Raw.new("#{escape node.content}"))
     end
 
-    def visit(node : Assign)
+    def visit(node : Block::Assign)
       to_io %(Liquid::Block::Assign.new("#{escape node.varname}",
                     Liquid::Block::Expression.new("#{escape node.value.var}")))
     end
 
-    def visit(node : Include)
+    def visit(node : Block::Include)
       to_io %(Liquid::Block::Include.new("#{escape node.template_name}"))
     end
 
-    def visit(node : Capture)
+    def visit(node : Block::Capture)
       def_to_io %(Liquid::Block::Capture.new("#{escape node.var_name}"))
       push
       node.children.each &.accept(self)
       pop
     end
 
-    def visit(node : For)
+    def visit(node : Block::For)
       if node.begin && node.end
         def_to_io %(Liquid::Block::For.new("#{node.loop_var}",
                                           #{node.begin}, #{node.end}))
@@ -81,11 +81,11 @@ module Liquid
       pop
     end
 
-    def visit(node : Expression)
+    def visit(node : Block::Expression)
       to_io %(Liquid::Block::Expression.new("#{escape node.var}"))
     end
 
-    def visit(node : If)
+    def visit(node : Block::If)
       def_to_io %(Liquid::Block::Expression.new(
                    "#{escape node.if_expression.not_nil!.var}"))
       def_to_io "Liquid::Block::If.new(#{@last_var})"
@@ -100,14 +100,14 @@ module Liquid
       pop
     end
 
-    def visit(node : ElsIf)
+    def visit(node : Block::ElsIf)
       def_to_io "Liquid::Block::ElsIf.new( Expression.new(\"#{escape node.if_expression.var}\"))"
       push
       node.children.each &.accept self
       pop
     end
 
-    def visit(node : Else)
+    def visit(node : Block::Else)
       def_to_io "Liquid::Block::Else.new"
       push
       node.children.each &.accept self

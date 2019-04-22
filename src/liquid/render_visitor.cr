@@ -26,7 +26,7 @@ module Liquid
       @io.to_s
     end
 
-    def visit(node : If)
+    def visit(node : Block::If)
       if node.if_expression.not_nil!.eval(@data).raw
         node.children.each &.accept(self)
       else
@@ -46,11 +46,11 @@ module Liquid
       end
     end
 
-    def visit(node : Node)
+    def visit(node : Block::Node)
       node.children.each &.accept(self)
     end
 
-    def visit(node : Assign)
+    def visit(node : Block::Assign)
       @data.set node.varname, node.value.eval(@data)
     end
 
@@ -58,7 +58,7 @@ module Liquid
       @io << node.content
     end
 
-    def visit(node : Capture)
+    def visit(node : Block::Capture)
       io = IO::Memory.new
       visitor = RenderVisitor.new @data, io
       node.children.each &.accept visitor
@@ -66,7 +66,7 @@ module Liquid
       @data.set node.var_name, io.to_s
     end
 
-    def visit(node : Increment)
+    def visit(node : Block::Increment)
       var = @data.get node.var_name
       if var && (num = var.as_i?)
         @data.set node.var_name, num + 1
@@ -75,7 +75,7 @@ module Liquid
       end
     end
 
-    def visit(node : Decrement)
+    def visit(node : Block::Decrement)
       var = @data.get node.var_name
       if var && (num = var.as_i?)
         @data.set node.var_name, num - 1
@@ -84,7 +84,7 @@ module Liquid
       end
     end
 
-    def visit(node : Expression)
+    def visit(node : Block::Expression)
       if node.children.empty?
         @io << node.eval(@data)
       else
@@ -92,7 +92,7 @@ module Liquid
       end
     end
 
-    def visit(node : Filtered)
+    def visit(node : Block::Filtered)
       matches = node.raw.scan GFILTER
       if matches.first["filter"] == node.first.var ||
          "\"#{matches.first["filter"]}\"" == node.first.var
@@ -122,11 +122,11 @@ module Liquid
       @io << result
     end
 
-    def visit(node : Boolean)
+    def visit(node : Block::Boolean)
       @io << (node.inner ? "true" : "false")
     end
 
-    def visit(node : For)
+    def visit(node : Block::For)
       data = @data.dup
       if node.begin && node.end
         render_with_range node, data
@@ -137,7 +137,7 @@ module Liquid
       end
     end
 
-    def visit(node : Include)
+    def visit(node : Block::Include)
       filename = if @template_path != nil
           File.join(@template_path.not_nil!, node.template_name)
         else
