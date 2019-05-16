@@ -93,6 +93,10 @@ module Liquid
     end
 
     def visit(node : Block::Filtered)
+      # AKN: added this to fix issue with filters within loops being applied multiple times
+      #      (once for each completed loop iteration) but not sure if it's the right thing to do
+      node.filters.clear
+
       matches = node.raw.scan GFILTER
       if matches.first["filter"] == node.first.var ||
          "\"#{matches.first["filter"]}\"" == node.first.var

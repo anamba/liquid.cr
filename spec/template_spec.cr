@@ -52,6 +52,15 @@ describe Template do
     tpl.render(ctx).should eq "\n    Got : 1\n    \n    Got : 12.2\n    \n    Got : here\n    "
   end
 
+  it "should render for loop when iterating over an array 2" do
+    tpl = Parser.parse("{%- for x in myarray -%}
+    Got : {{ x | escape }}
+    {%- endfor -%}")
+    ctx = Context.new
+    ctx.set("myarray", ["<tag>", 12.2, "<tag2>"])
+    tpl.render(ctx).should eq "Got : &lt;tag&gt;Got : 12.2Got : &lt;tag2&gt;"
+  end
+
   it "should render for loop when iterating over a hash by value (key+value array)" do
     tpl = Parser.parse <<-EOT
     {%- for v in myhash -%}

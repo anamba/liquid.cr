@@ -2,6 +2,10 @@
 
 Arranged in reverse chronological order (latest changes on top).
 
+## Unreleased
+
+* [FIXED] Filters within loops no longer applied once per each completed loop iteration
+
 ## v0.5.0 - 2019-04-25
 
 * Support for Crystal 0.28.0
