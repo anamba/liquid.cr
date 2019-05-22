@@ -4,8 +4,10 @@ Arranged in reverse chronological order (latest changes on top).
 
 ## Unreleased
 
-* [FIXED] Filters within loops no longer applied once per each completed loop iteration
 * [NEW] Support Hash#size
+* [NEW] Support Array literals
+* [FIXED] Filters within loops no longer applied once per each completed loop iteration
+* [FIXED] Filters can now take more than two arguments
 
 ## v0.5.0 - 2019-04-25
 
