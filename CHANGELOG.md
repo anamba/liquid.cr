@@ -2,8 +2,9 @@
 
 Arranged in reverse chronological order (latest changes on top).
 
-## Unreleased
+## v0.5.1
 
+* Support for Crystal 0.29.0
 * [NEW] Support Hash#size
 * [NEW] Support Array literals
 * [FIXED] Filters within loops no longer applied once per each completed loop iteration
