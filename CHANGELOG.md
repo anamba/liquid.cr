@@ -2,7 +2,11 @@
 
 Arranged in reverse chronological order (latest changes on top).
 
-## v0.5.1
+## v0.5.2 - 2019-08-07
+
+* Support for Crystal 0.30.0
+
+## v0.5.1 - 2019-06-06
 
 * Support for Crystal 0.29.0
 * [NEW] Support Hash#size
