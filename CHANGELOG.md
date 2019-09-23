@@ -2,6 +2,10 @@
 
 Arranged in reverse chronological order (latest changes on top).
 
+## Unreleased
+
+* Support for Crystal 0.31.0
+
 ## v0.5.2 - 2019-08-07
 
 * Support for Crystal 0.30.0
