@@ -3,11 +3,6 @@ require "./any"
 
 module Liquid
   struct Context
-    JSON.mapping(
-      inner: Hash(String, JSON::Any),
-      strict: {type: Bool, default: false}
-    )
-
     property strict : Bool = false
 
     def initialize(@strict = false)

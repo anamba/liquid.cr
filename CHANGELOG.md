@@ -2,6 +2,10 @@
 
 Arranged in reverse chronological order (latest changes on top).
 
+## Unreleased
+
+* Fixed Crystal 0.35.0 deprecation warning (removed unused call to JSON.mapping)
+
 ## v0.5.3 - 2020-02-15
 
 * Support for Crystal 0.33.0
