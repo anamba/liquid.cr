@@ -43,6 +43,11 @@ describe Template do
     tpl.render(Context.new).should eq "\n    Iteration n°1\n    \n    Iteration n°2\n    \n    Iteration n°3\n    "
   end
 
+  # it "should support loop variables in nested loops" do
+  #   tpl = Parser.parse("{% for x in 0..2 %}{{ loop.index }}-{% for y in 0..2 %}{{ loop.index }}{% endfor %}-{{ loop.index }};{% endfor %}")
+  #   tpl.render(Context.new).should eq "1-123-1;2-123-2;3-123-3;"
+  # end
+
   it "should render for loop when iterating over an array" do
     tpl = Parser.parse("{% for x in myarray %}
     Got : {{x}}
