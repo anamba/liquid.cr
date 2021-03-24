@@ -2,7 +2,11 @@
 
 Arranged in reverse chronological order (latest changes on top).
 
-## Unreleased
+## v0.6.1 - 2021-03-24
+
+* Support for Crystal 1.0
+
+## v0.6.0 - 2021-01-27
 
 * Fixed Crystal 0.35.0 deprecation warning (removed unused call to JSON.mapping)
 
